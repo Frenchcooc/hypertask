@@ -1,0 +1,29 @@
+{
+  "name": "hypertask",
+  "version": "0.0.1",
+  "description": "Node.js client for Hypertask",
+  "main": "dist/index.js",
+  "keywords": [
+    "hypertask",
+    "monitoring",
+    "task management",
+    "api"
+  ],
+  "files": [
+    "dist/"
+  ],
+  "author": "Hypertask <support@hypertask.io> (https://hypertask.io)",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.10",
+    "@types/uuid": "^8.3.0",
+    "typescript": "^4.3.4"
+  },
+  "scripts": {
+    "test": "npm run build && node test/index.js",
+    "build": "rm -rf dist && tsc"
+  }
+}
