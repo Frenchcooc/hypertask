@@ -1,7 +1,7 @@
 "use strict";
 
 import fetch from "node-fetch";
-import { randomBytes } from "crypto";
+import { createHash, randomBytes } from "crypto";
 
 enum TaskStatus {
   IDLE = "idle",
@@ -11,6 +11,7 @@ enum TaskStatus {
 }
 
 interface TaskOptions {
+  id?: string;
   delay?: number;
 }
 
@@ -58,7 +59,7 @@ class Task {
   private _hyper: Hypertask;
 
   constructor(hyper: Hypertask, options: TaskOptions) {
-    this._id = this.generateId();
+    this._id = this.generateId(options && options.id);
     this._hyper = hyper;
     this._status = TaskStatus.IDLE;
 
@@ -122,8 +123,16 @@ class Task {
    * @return {String}
    */
 
-  private generateId(): string {
-    return randomBytes(64).toString("hex").substring(0, 36);
+  private generateId(id?: string): string {
+    let hash = "";
+
+    if (typeof id === "string" && id) {
+      hash = createHash("sha1").update(id).digest("hex");
+    } else {
+      hash = randomBytes(64).toString("hex");
+    }
+
+    return hash.substring(0, 36);
   }
 
   /**
