@@ -14,7 +14,7 @@ interface TaskOptions {
   delay?: number;
 }
 
-class Hypertask {
+export class Hypertask {
   private _bucket: string = "";
   private _key: string = "";
 
@@ -145,4 +145,3 @@ class Task {
 }
 
 export default Hypertask;
-export { Hypertask };
